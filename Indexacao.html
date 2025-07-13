@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tucano Música</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            cursor: none;
+        }
+
+        .ascii-art {
+            white-space: pre;
+            font-size: 12px;
+            line-height: 1;
+            text-shadow: 0 0 5px #0f0;
+            position: relative;
+            z-index: 2;
+            animation: flicker 0.01s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+            20%, 22%, 24%, 55% { opacity: 0.2; }
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 24px;
+            text-shadow: 0 0 10px #0f0;
+            animation: glitch 1s linear infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        /* Efeitos de distorção */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABaSURBVGhD7cExAQAwDMCg+zfdQxQy+JEkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSdJf7gA4FgILQ8X1JAAAAABJRU5ErkJggg==');
+            opacity: 0.05;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 255, 0, 0.1) 1px,
+                transparent 1px
+            );
+            background-size: 100% 2px;
+            z-index: 1;
+            pointer-events: none;
+            animation: scan 8s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        .glitch-box {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .glitch-box::before,
+        .glitch-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            mix-blend-mode: difference;
+        }
+
+        .glitch-box::before {
+            animation: glitch-effect 3s infinite linear;
+        }
+
+        .glitch-box::after {
+            animation: glitch-effect 2s infinite linear reverse;
+        }
+
+        @keyframes glitch-effect {
+            0% { transform: translate(0); }
+            20% { transform: translate(-5px, 5px); }
+            40% { transform: translate(-5px, -5px); }
+            60% { transform: translate(5px, 5px); }
+            80% { transform: translate(5px, -5px); }
+            100% { transform: translate(0); }
+        }
+
+        /* Cursor personalizado */
+        .custom-cursor {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            pointer-events: none;
+            z-index: 9999;
+            background-image: url('https://cdn.pixabay.com/photo/2016/11/29/11/45/spotify-1759471_640.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            animation: cursor-pulse 0.5s infinite alternate;
+        }
+
+        @keyframes cursor-pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            100% { transform: translate(-50%, -50%) scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <div class="glitch-box"></div>
+    <div class="noise"></div>
+    <div class="scanlines"></div>
+
+    <div class="ascii-art">
+                        ▄▄▄▀▀▀▄▄███▄
+                ▄▀▀░░░░░░░▐░▀██▌
+         ▄▀░░░░▄▄███░▌▀▀░▀█
+       █░░░░░░▀▀███▒▒▒▒▒▒█
+   ▄█░░▄▀▀▀▀▀▀▀▀▄▐░░░░░░█Tucano Música
+▌▄▄▀▀                      ▌░░░░▄███████distribuição em 34 plataformas
+                                   ▐░░░░▐███████████▄globais
+                                     ▀▄░░░▐█████████████▄Tuca-Tu-Tuca Brasil 🇧🇷
+                                         ▀▄▄███████████████
+                                                          █▀█████
+    </div>
+    <div class="message">
+        Em fase de teste, desculpe.
+    </div>
+
+    <script>
+        // Cursor personalizado com a imagem do link
+        document.addEventListener('DOMContentLoaded', () => {
+            const cursor = document.createElement('div');
+            cursor.className = 'custom-cursor';
+            document.body.appendChild(cursor);
+
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+        });
+
+        // Efeito de distorção aleatória
+        setInterval(() => {
+            const glitchBox = document.querySelector('.glitch-box');
+            glitchBox.style.clipPath = `polygon(
+                0% ${Math.random() * 100}%,
+                ${Math.random() * 100}% 0%,
+                100% ${Math.random() * 100}%,
+                ${Math.random() * 100}% 100%
+            )`;
+        }, 100);
+
+        // Efeito de cor aleatória no texto
+        setInterval(() => {
+            const hue = Math.floor(Math.random() * 360);
+            document.body.style.color = `hsl(${hue}, 100%, 50%)`;
+        }, 3000);
+    </script>
+</body>
+</html>
